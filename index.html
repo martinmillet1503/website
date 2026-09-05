@@ -120,7 +120,20 @@
     font-family:Archivo,sans-serif;font-size:12px;font-weight:500;
     letter-spacing:3.2px;text-transform:uppercase;color:var(--hero-ink);
   }
-  .hero-body{padding-block:clamp(40px,6vw,88px) clamp(36px,5vw,64px)}
+  .hero-body{
+    display:grid;grid-template-columns:minmax(0,1fr) clamp(210px,23vw,330px);
+    gap:clamp(32px,7vw,120px);align-items:start;
+    padding-block:clamp(40px,6vw,88px) clamp(36px,5vw,64px);
+  }
+  .portrait{margin:0;justify-self:end;width:100%;max-width:330px}
+  .portrait img{
+    display:block;width:100%;aspect-ratio:1010 / 1314;object-fit:cover;
+    border:1px solid rgba(243,241,236,.38);padding:7px;background:rgba(243,241,236,.08);
+  }
+  .portrait figcaption{
+    margin-top:12px;color:var(--hero-soft);font-size:10px;letter-spacing:1.5px;
+    line-height:1.4;text-transform:uppercase;text-align:right;
+  }
   h1{
     font-size:var(--f-h1);line-height:.96;letter-spacing:.01em;
     text-transform:uppercase;color:var(--hero-ink);
@@ -257,6 +270,7 @@
     .facts{grid-template-columns:repeat(2,1fr)}
     .fact:nth-child(odd){padding-left:0;border-left:0}
     .fact:nth-child(3),.fact:nth-child(4){border-top:1px solid rgba(243,241,236,.22)}
+    .hero-body{grid-template-columns:minmax(0,1fr) minmax(180px,240px);gap:32px}
   }
   @media (max-width:640px){
     .value-grid,.steps,.facts,.offer-main,.ref{grid-template-columns:1fr}
@@ -265,7 +279,8 @@
     .fact{border-top-color:rgba(243,241,236,.22)}
     .value-item:first-child,.step:first-child,.fact:first-child{border-top:0}
     .ref{gap:12px}
-    .hero-body{max-width:none}
+    .hero-body{display:block;max-width:none}
+    .portrait{width:min(62vw,260px);margin:36px 0 0 auto}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
@@ -283,12 +298,18 @@
   </div>
 
   <div class="wrap hero-body">
-    <h1>Le moteur<br>d'abord<em>Inspection, garantie, optimisation — à bord, partout dans le monde.</em></h1>
-    <p class="hero-lead">Un yacht ne se juge pas à quai. J'interviens toujours en salle des machines pour établir l'état réel de la motorisation, chiffrer ce qui doit l'être, obtenir des constructeurs ce qui vous est dû, et former l'équipage à faire durer l'ensemble.</p>
-    <div class="cta-row">
-      <a class="btn" href="#contact">Demander une inspection</a>
-      <a class="btn ghost" href="#offres">Les trois interventions</a>
+    <div class="hero-copy">
+      <h1>Le moteur<br>d'abord<em>Inspection, garantie, optimisation — à bord, partout dans le monde.</em></h1>
+      <p class="hero-lead">Un yacht ne se juge pas à quai. J'interviens toujours en salle des machines pour établir l'état réel de la motorisation, chiffrer ce qui doit l'être, obtenir des constructeurs ce qui vous est dû, et former l'équipage à faire durer l'ensemble.</p>
+      <div class="cta-row">
+        <a class="btn" href="#contact">Demander une inspection</a>
+        <a class="btn ghost" href="#offres">Les trois interventions</a>
+      </div>
     </div>
+    <figure class="portrait">
+      <img src="assets/martin-millet-portrait.png" alt="Portrait de Martin Millet">
+      <figcaption>Martin Millet</figcaption>
+    </figure>
   </div>
 
   <div class="wrap">
