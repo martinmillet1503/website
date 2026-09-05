@@ -106,6 +106,16 @@
   .hero > *{position:relative;z-index:2}
   .hero-top{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:baseline}
   .hero-top .sur{color:var(--hero-soft)}
+  .language-switch{
+    display:inline-flex;align-items:center;gap:8px;margin-left:auto;
+    font:500 11px/1 Archivo,sans-serif;letter-spacing:1.4px;color:var(--hero-soft);
+  }
+  .language-switch button{
+    appearance:none;cursor:pointer;padding:8px 10px;border:1px solid rgba(243,241,236,.42);
+    background:transparent;color:var(--hero-ink);font:500 11px/1 Archivo,sans-serif;
+    letter-spacing:1.3px;transition:background .25s,color .25s,border-color .25s;
+  }
+  .language-switch button:hover{background:rgba(243,241,236,.10);border-color:var(--hero-ink)}
   .mark{
     font-family:Archivo,sans-serif;font-size:12px;font-weight:500;
     letter-spacing:3.2px;text-transform:uppercase;color:var(--hero-ink);
@@ -269,6 +279,7 @@
   <div class="wrap hero-top">
     <span class="mark">Martin Millet</span>
     <span class="sur">Motorisation de yachts de luxe · Interventions dans le monde entier</span>
+    <div class="language-switch"><span id="current-language" aria-hidden="true">FR</span><button id="language-toggle" type="button" aria-label="Passer le site en anglais">EN</button></div>
   </div>
 
   <div class="wrap hero-body">
@@ -637,6 +648,194 @@
       window.console.error('Unable to initialize the swell animation.', error);
     }
   }
+})();
+</script>
+<script>
+(() => {
+  const english = {
+    "Martin Millet — Motorisation Yacht": "Martin Millet — Yacht Engine Services",
+    "Motorisation de yachts de luxe · Interventions dans le monde entier": "Luxury yacht engine services · Worldwide assignments",
+    "Le moteur": "The engine",
+    "d'abord": "first",
+    "Le moteur d'abord": "The engine first",
+    "Inspection, garantie, optimisation — à bord, partout dans le monde.": "Inspection, warranty support, optimisation — on board, worldwide.",
+    "Un yacht ne se juge pas à quai. J'interviens toujours en salle des machines pour établir l'état réel de la motorisation, chiffrer ce qui doit l'être, obtenir des constructeurs ce qui vous est dû, et former l'équipage à faire durer l'ensemble.": "A yacht cannot be assessed from the dock. I work in the engine room to establish the true condition of its machinery, cost the work required, secure what manufacturers owe you, and train the crew to keep everything running for longer.",
+    "Demander une inspection": "Request an inspection",
+    "Les trois interventions": "The three services",
+    "Marine marchande": "Merchant marine",
+    "5 ans": "5 years",
+    "Navigation internationale, moteurs lents et semi-rapides": "International sailing, slow- and medium-speed engines",
+    "Yachts de luxe": "Luxury yachts",
+    "3 ans": "3 years",
+    "Unités de 24 à 60 m, propulsion et groupes": "24–60 m vessels, propulsion and generators",
+    "Formation": "Training",
+    "École de la Marine marchande, Saint-Malo": "Merchant Marine Academy, Saint-Malo",
+    "Zone d'intervention": "Service area",
+    "Sans limite": "Worldwide",
+    "Méditerranée, Caraïbes, Atlantique, océan Indien": "Mediterranean, Caribbean, Atlantic, Indian Ocean",
+    "Pourquoi un suivi moteur": "Why engine monitoring matters",
+    "Ce que protège une motorisation tenue": "What well-maintained machinery protects",
+    "La salle des machines représente une part majeure de la valeur d'un yacht et la totalité de sa liberté de mouvement. Quatre risques concrets se traitent en amont, jamais dans l'urgence d'une escale.": "The engine room represents a major share of a yacht’s value and all of its freedom of movement. Four tangible risks are addressed in advance—not in the urgency of a port call.",
+    "Patrimoine": "Asset value",
+    "Préserver la valeur du moteur": "Protect engine value",
+    "Un historique d'entretien documenté, des relevés horodatés et des analyses d'huile suivies dans le temps : c'est ce qui soutient le prix à la revente et rassure l'expert de l'acheteur.": "A documented maintenance history, time-stamped readings and oil analyses tracked over time: these support resale value and reassure the buyer’s surveyor.",
+    "Performance": "Performance",
+    "Retrouver le rendement d'origine": "Restore original performance",
+    "Pression de suralimentation, températures d'échappement cylindre par cylindre, opacité des fumées, consommation au régime de croisière : chaque écart au relevé constructeur se corrige et se mesure.": "Boost pressure, cylinder-by-cylinder exhaust temperatures, smoke opacity and fuel consumption at cruising speed: every deviation from manufacturer data can be corrected and measured.",
+    "Disponibilité": "Availability",
+    "Éviter l'avarie en pleine saison": "Avoid a breakdown in peak season",
+    "Une panne survient rarement sans signe avant-coureur. Un turbo, un injecteur ou un échangeur détecté à temps coûte une escale technique — pas une croisière annulée et un remorquage.": "Failures rarely occur without warning signs. Catching a turbocharger, injector or heat exchanger in time costs a technical stop—not a cancelled cruise and a tow.",
+    "Conformité": "Compliance",
+    "Rester en règle au port": "Stay compliant in port",
+    "Émissions MARPOL Annexe VI, seuils NOx, registre des hydrocarbures, certificats moteur : une non-conformité relevée par le contrôle par l'État du port se solde par une amende et une immobilisation.": "MARPOL Annex VI emissions, NOx limits, oil record books and engine certificates: non-compliance found during port-state control can result in a fine and detention.",
+    "Trois interventions": "Three services",
+    "Constater, obtenir, faire durer": "Assess, secure, sustain",
+    "Les trois prestations suivent le cycle de vie d'une motorisation et se commandent séparément. La plupart des armateurs commencent par l'inspection : elle conditionne tout le reste.": "The three services follow the life cycle of marine machinery and can be commissioned separately. Most owners begin with the inspection: it informs everything that follows.",
+    "Inspection moteur & diagnostic de performance": "Engine inspection & performance diagnosis",
+    "Inspection moteur &": "Engine inspection &",
+    "diagnostic de performance": "performance diagnosis",
+    "Deux à trois jours à bord, moteur froid puis en charge, pour établir l'état réel de la propulsion et des groupes électrogènes.": "Two to three days on board, with the engine cold and then under load, to establish the true condition of the propulsion plant and generators.",
+    "1 à 3 jours à bord": "1–3 days on board",
+    "Ce qui est contrôlé": "What is checked",
+    "Endoscopie des chemises, soupapes et têtes de piston": "Borescope inspection of liners, valves and piston crowns",
+    "Prélèvement et analyse spectrométrique d'huile (fer, cuivre, silicium, dilution carburant)": "Oil sampling and spectrometric analysis (iron, copper, silicon, fuel dilution)",
+    "Relevé des températures d'échappement cylindre par cylindre et écarts entre lignes": "Cylinder-by-cylinder exhaust-temperature readings and bank deviations",
+    "Pression de suralimentation, étanchéité du circuit d'air, encrassement des échangeurs": "Boost pressure, air-system integrity and heat-exchanger fouling",
+    "Circuits carburant et refroidissement, état des pompes et injecteurs": "Fuel and cooling circuits, condition of pumps and injectors",
+    "Essai en charge progressif et relevé des blow-by": "Progressive load test and blow-by readings",
+    "Lecture et interprétation des historiques d'alarmes de la GTC": "Review and interpretation of monitoring-system alarm histories",
+    "Livrables": "Deliverables",
+    "Rapport d'inspection illustré, avec photographies d'endoscopie datées": "Illustrated inspection report with dated borescope photographs",
+    "Comparatif relevés / courbes constructeur, ligne par ligne": "Line-by-line comparison of readings and manufacturer curves",
+    "Plan d'action hiérarchisé : sécurité, disponibilité, économie": "Prioritised action plan: safety, availability, economy",
+    "Estimation budgétaire des travaux recommandés": "Budget estimate for recommended work",
+    "Exemple de relevé": "Example readings",
+    "Écart T° échappement inter-cylindres": "Inter-cylinder exhaust-temperature spread",
+    "Pression de suralimentation à 100 %": "Boost pressure at 100%",
+    "Fer dans l'huile (seuil d'alerte)": "Iron in oil (alert threshold)",
+    "Heures moteur entre visites": "Engine hours between services",
+    "Constructeurs, garanties et réparations": "Manufacturers, warranties & repairs",
+    "Constructeurs, garanties": "Manufacturers, warranties",
+    "et réparations": "& repairs",
+    "Je porte le dossier technique face au motoriste et au chantier, dans leur langage, jusqu'à la réception des travaux.": "I represent the technical case with the engine manufacturer and shipyard, in their language, through to acceptance of the work.",
+    "Mission au forfait ou au dossier": "Fixed-fee or case-based assignment",
+    "Interface constructeurs et chantiers": "Manufacturer & shipyard liaison",
+    "Relation directe avec les réseaux MTU, MAN, Caterpillar, Volvo Penta, Kohler, Onan": "Direct liaison with MTU, MAN, Caterpillar, Volvo Penta, Kohler and Onan networks",
+    "Qualification de l'avarie et rédaction du rapport technique opposable": "Failure assessment and preparation of an evidential technical report",
+    "Constitution et défense du dossier de garantie : preuve d'entretien, historique, causalité": "Preparation and defence of the warranty case: maintenance evidence, history and causation",
+    "Recherche de l'atelier agréé le plus proche de votre programme de navigation": "Finding the approved workshop closest to your cruising itinerary",
+    "Conduite de la réparation": "Repair management",
+    "Analyse contradictoire des devis, ligne par ligne, main-d'œuvre et pièces": "Independent line-by-line review of quotations, labour and parts",
+    "Supervision du chantier et contrôle des pièces déposées": "Shipyard supervision and inspection of removed parts",
+    "Essais de recette et procès-verbal de réception": "Acceptance trials and handover report",
+    "Mise à jour du carnet moteur et archivage des preuves": "Engine-log update and evidence archiving",
+    "Ce que cela évite": "What this avoids",
+    "Un dossier de garantie mal constitué se traduit par un refus de prise en charge et une facture intégralement à la charge de l'armateur. La causalité doit être établie avant le démontage, pas après.": "A poorly prepared warranty claim results in a refusal of coverage and a bill entirely borne by the owner. Causation must be established before dismantling, not afterwards.",
+    "Revue d'optimisation et formation des équipages": "Optimisation review & crew training",
+    "Revue d'optimisation": "Optimisation review",
+    "et formation des équipages": "& crew training",
+    "Le mode d'exploitation détermine la durée de vie du moteur bien plus que la marque. Cela s'apprend et se documente.": "Operating practice determines engine life far more than the brand. It can be learned and documented.",
+    "2 jours à bord + suivi": "2 days on board + follow-up",
+    "Revue d'exploitation": "Operating review",
+    "Analyse des profils d'utilisation réels : régimes tenus, temps de ralenti, marches en charge partielle": "Analysis of actual operating profiles: engine speeds, idle time and part-load running",
+    "Réglage des plages de croisière au meilleur rendement de consommation": "Setting cruising ranges for the best fuel efficiency",
+    "Procédures de démarrage, de montée en charge, de rodage et d'arrêt": "Starting, load-up, running-in and shutdown procedures",
+    "Plan de maintenance calé sur les heures réelles, pas sur le calendrier": "Maintenance plan based on actual running hours, not the calendar",
+    "Conduite en hivernage et remise en service": "Winter lay-up and recommissioning procedures",
+    "Formation à bord": "On-board training",
+    "Session de deux jours pour le chef mécanicien et l'équipage de pont": "Two-day session for the chief engineer and deck crew",
+    "Lecture des paramètres et reconnaissance des signaux faibles": "Reading parameters and recognising early warning signs",
+    "Conduite à tenir en cas d'alarme : ce qui se traite à bord, ce qui s'arrête": "Response to alarms: what can be dealt with on board and what must be stopped",
+    "Carnet de conduite et fiches de relevés remis et personnalisés": "Customised operating log and reading sheets provided",
+    "Résultat attendu": "Expected outcome",
+    "Une consommation maîtrisée au régime de croisière, des intervalles d'entretien tenus, et un équipage capable de qualifier une anomalie avant qu'elle ne devienne une avarie.": "Controlled fuel consumption at cruising speed, maintained service intervals, and a crew able to identify an anomaly before it becomes a failure.",
+    "Déroulé": "Process",
+    "Comment se passe une mission": "How an assignment works",
+    "Le programme de navigation commande. L'intervention se cale sur une escale existante chaque fois que c'est possible, pour ne pas retirer un seul jour de mer.": "The cruising programme comes first. Whenever possible, the work is scheduled during an existing port call so as not to take away a single day at sea.",
+    "Sous 48 h": "Within 48 hours",
+    "Prise de contact": "Initial contact",
+    "Type d'unité, motorisation, heures au compteur, historique connu, symptômes observés. Retour avec un périmètre et un budget.": "Vessel type, machinery, engine hours, known history and observed symptoms. You receive a proposed scope and budget.",
+    "Avant embarquement": "Before boarding",
+    "Audit documentaire": "Document review",
+    "Carnets d'entretien, factures, rapports d'analyses d'huile, historiques d'alarmes. La moitié des causes s'identifie sur pièces.": "Maintenance logs, invoices, oil-analysis reports and alarm histories. Half of all root causes can be identified from documents.",
+    "À bord": "On board",
+    "Intervention": "Service visit",
+    "Contrôles moteur froid, essais en charge, relevés. Point de fin de journée avec le chef mécanicien et le capitaine.": "Cold-engine checks, load tests and readings. An end-of-day update with the chief engineer and captain.",
+    "12 mois": "12 months",
+    "Suivi": "Follow-up",
+    "Rapport sous dix jours, puis accompagnement à distance sur les travaux engagés et relecture des analyses d'huile suivantes.": "Report within ten days, followed by remote support on the work undertaken and review of subsequent oil analyses.",
+    "Interventions": "Assignments",
+    "Quelques missions récentes": "A selection of recent assignments",
+    "Unités de 24 à 45 mètres, en propulsion classique comme en transmission pods. Le nom de l'unité est mentionné avec l'accord de l'armateur.": "Vessels from 24 to 45 metres, with conventional propulsion or pod drives. Vessel names are used with the owner’s permission.",
+    "Surchauffe récurrente sur la ligne bâbord au-delà de 80 % de charge. Endoscopie et contrôle du circuit eau de mer.": "Recurring overheating on the port bank above 80% load. Borescope inspection and seawater-circuit check.",
+    "Échangeur entartré et anodes hors service. Température d'échappement ramenée dans la plage constructeur, écart inter-cylindres divisé par trois.": "Scaled heat exchanger and failed anodes. Exhaust temperature returned to the manufacturer range; inter-cylinder spread cut by two thirds.",
+    "Rupture de turbocompresseur hors période d'entretien. Constitution du dossier de garantie avant démontage.": "Turbocharger failure outside the service interval. Warranty case prepared before dismantling.",
+    "Causalité établie sur défaut de lubrification d'origine. Prise en charge constructeur obtenue sur l'essentiel de la facture.": "Causation established as an original lubrication defect. Manufacturer coverage secured for most of the invoice.",
+    "Moteur auxiliaire peu sollicité, encrassement chronique et démarrages difficiles après hivernage.": "Lightly used auxiliary engine, chronic fouling and difficult starts after winter lay-up.",
+    "Procédure de montée en charge et plan de sollicitation périodique remis à l'équipage. Fumées blanches au démarrage supprimées.": "Load-up procedure and periodic operating plan given to the crew. White smoke at startup eliminated.",
+    "Mise en conformité émissions et documentation moteur avant une saison en Méditerranée occidentale.": "Emissions compliance and engine documentation ahead of a Western Mediterranean season.",
+    "Registre des hydrocarbures et certificats remis à jour, réglages d'injection repris. Contrôle par l'État du port passé sans réserve.": "Oil record book and certificates updated, injection settings corrected. Port-state inspection passed without findings.",
+    "Revue d'exploitation et formation de l'équipage nouvellement constitué.": "Operating review and training for the newly assembled crew.",
+    "Plage de croisière recalée à 22 nœuds, consommation horaire en baisse sensible et intervalles d'entretien tenus sur la saison.": "Cruising range reset at 22 knots, noticeably lower hourly fuel consumption and service intervals maintained throughout the season.",
+    "Missions présentées à titre d'illustration pour la mise en ligne du site — à remplacer par les références réelles et les chiffres validés avant publication.": "Assignments shown for illustration while the website is prepared — replace with real references and validated figures before publication.",
+    "Ils ont fait appel": "Client perspectives",
+    "Ce qu'en disent les bords": "What crews say",
+    "Capitaines, chefs mécaniciens et gestionnaires de flotte : trois regards sur les trois interventions.": "Captains, chief engineers and fleet managers: three perspectives on the three services.",
+    "« Le rapport d'inspection nous a évité une saison sur trois moteurs fatigués. Tout était classé par urgence, avec les coûts en face. L'armateur a pu décider en une réunion. »": "“The inspection report saved us from a season with three tired engines. Everything was prioritised by urgency, with the costs alongside. The owner could decide in one meeting.”",
+    "Capitaine, M/Y 34 m": "Captain, 34 m M/Y",
+    "Méditerranée occidentale": "Western Mediterranean",
+    "« Le motoriste refusait la garantie. Martin a repris le dossier, établi la cause avant le démontage et tenu la discussion technique. Nous n'aurions jamais obtenu cela seuls. »": "“The engine manufacturer was refusing the warranty. Martin took over the case, established the cause before dismantling and led the technical discussion. We would never have achieved that alone.”",
+    "Gestionnaire de flotte": "Fleet manager",
+    "Trois unités, Caraïbes et Atlantique": "Three vessels, Caribbean and Atlantic",
+    "« Deux jours de formation et l'équipage a changé de regard sur la salle des machines. Les relevés sont tenus, les alarmes sont comprises, on ne subit plus. »": "“Two days of training changed the crew’s view of the engine room. The readings are kept, the alarms are understood; we are no longer simply reacting.”",
+    "Chef mécanicien, explorer 45 m": "Chief engineer, 45 m explorer",
+    "Océan Indien": "Indian Ocean",
+    "Témoignages fictifs destinés à la maquette — à remplacer par des verbatims clients recueillis et validés.": "Fictional testimonials for the mock-up — replace with collected, approved client quotations.",
+    "Prendre contact": "Get in touch",
+    "Dites-moi où est le bateau et ce qu'il fait": "Tell me where the yacht is and what it is doing",
+    "Dites-moi où est le bateau": "Tell me where the yacht is",
+    "et ce qu'il fait": "and what it is doing",
+    "Type d'unité, motorisation, heures au compteur et symptômes observés : avec cela, je reviens vers vous sous 48 heures avec un périmètre d'intervention et un budget. Déplacement possible sur tous les bassins de navigation.": "Vessel type, machinery, engine hours and observed symptoms: with that, I will get back to you within 48 hours with a service scope and budget. Travel is possible to every cruising area.",
+    "Nom": "Name", "Courriel": "Email", "Téléphone": "Phone", "Base": "Base", "Langues": "Languages", "Français, anglais": "French, English", "Délai de réponse": "Response time", "48 heures": "48 hours", "Monde entier": "Worldwide",
+    "à renseigner": "to be confirmed",
+    "Martin Millet — Expert motorisation yachts": "Martin Millet — Yacht Engine Specialist",
+    "Inspection · Garanties · Optimisation": "Inspection · Warranties · Optimisation"
+  };
+
+  const originals = new WeakMap();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      return node.parentElement && !/^(SCRIPT|STYLE)$/i.test(node.parentElement.tagName)
+        ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  const nodes = [];
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    originals.set(node, node.nodeValue);
+    nodes.push(node);
+  }
+  const toggle = document.getElementById('language-toggle');
+  const currentLanguage = document.getElementById('current-language');
+
+  function setLanguage(language) {
+    const isEnglish = language === 'en';
+    nodes.forEach((node) => {
+      const original = originals.get(node);
+      const key = original.trim();
+      if (!isEnglish || !english[key]) { node.nodeValue = original; return; }
+      node.nodeValue = original.replace(key, english[key]);
+    });
+    document.documentElement.lang = language;
+    document.title = isEnglish ? english['Martin Millet — Motorisation Yacht'] : 'Martin Millet — Motorisation Yacht';
+    currentLanguage.textContent = isEnglish ? 'EN' : 'FR';
+    toggle.textContent = isEnglish ? 'FR' : 'EN';
+    toggle.setAttribute('aria-label', isEnglish ? 'Switch the website to French' : 'Passer le site en anglais');
+    try { localStorage.setItem('site-language', language); } catch (_) {}
+  }
+
+  toggle.addEventListener('click', () => setLanguage(document.documentElement.lang === 'fr' ? 'en' : 'fr'));
+  try { if (localStorage.getItem('site-language') === 'en') setLanguage('en'); } catch (_) {}
 })();
 </script>
 </body>
